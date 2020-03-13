@@ -1,0 +1,3 @@
+[submodule "algorithmBlog"]
+	path = algorithmBlog
+	url = git@github.com:Terry-bear/algorithmBlog.git
