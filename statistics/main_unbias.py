@@ -24,6 +24,7 @@ def sample(num_of_samples, sample_sz, var):
 
 
 if __name__ == '__main__':
+    """有偏"""
     data1 = sample(1000, 40, variance_bias)
     plt.hist(data1, bins="auto", rwidth=0.8)
     # 样本方差均值 实验值
@@ -31,4 +32,14 @@ if __name__ == '__main__':
     # 总体方差均值 (b-a)^2/12  0.0, 1.0 理论值
     plt.axvline(x=1 / 12, c="red")
     print("bias: ", mean(data1), 1/12)
+    plt.show()
+
+    """无偏"""
+    data2 = sample(1000, 40, variance)
+    plt.hist(data1, bins="auto", rwidth=0.8)
+    # 样本方差均值 实验值
+    plt.axvline(x=mean(data2), c="000")
+    # 总体方差均值 (b-a)^2/12  0.0, 1.0 理论值
+    plt.axvline(x=1 / 12, c="red")
+    print("un_bias: ", mean(data2), 1 / 12)
     plt.show()
