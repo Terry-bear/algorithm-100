@@ -1,4 +1,4 @@
-from stats.hypothesis_testing import z_test, t_test
+from stats.hypothesis_testing import z_test, t_test, chi2_test, f_test
 from stats.interval_est import mean_ci_est, mean_diff_ci_z_est
 
 if __name__ == '__main__':
@@ -14,8 +14,13 @@ if __name__ == '__main__':
     # print(mean_diff_ci_z_est(data1, data2, 0.05, sigma1=5, sigma2=15))
 
     # one-sample t-test
-    print(t_test(data1, tail="both", mu=35))
+    # print(t_test(data1, tail="both", mu=35))
     # two-sample t-test
-    print(t_test(data1, data2, tail="both", mu=0, equal=False))
+    # print(t_test(data1, data2, tail="both", mu=0, equal=False))
     # paired t-test
     # print(t_test_paired(data1, data2, tail="both", mu=0))
+
+    # 一个方差的卡方检验
+    print(chi2_test(data1, tail="both", sigma2=5))
+    # 两个方差的卡方检验
+    print(f_test(data1, data2, tail="both", ratio=1))
