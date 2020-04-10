@@ -148,3 +148,36 @@ def f_test(data1, data2, tail="both", ratio=1):
         p = 1 - f.cdf(f_val, df1, df2)
 
     return f_val, df1, df2, p
+
+
+def anova_oneway(data):
+    """单因素方差分析"""
+    k = len(data)
+    assert k > 1
+
+    # 组均值
+    group_means = [mean(group) for group in data]
+    # 组样本容量
+    group_szs = [len(group) for group in data]
+    n = sum(group_szs)
+    assert n > k
+
+    # 总平均
+    grand_mean = sum(group_mean * group_sz for group_mean, group_sz in zip(group_means, group_szs))/n
+
+    # 平方和
+    sst = sum(sum((y - grand_mean) ** 2 for y in group) for group in data)
+    ssg = sum((group_mean - grand_mean)**2*group_sz for group_mean, group_sz in zip(group_means, group_szs))
+    sse = sst - ssg
+
+    dfg = k - 1
+    dfe = n - k
+
+    # 均方和
+    msg = ssg/dfg
+    mse = sse/dfe
+
+    f_value = msg/mse
+    p = 1 - f.cdf(f_value, dfg, dfe)
+
+    return f_value, dfg, dfe, p
