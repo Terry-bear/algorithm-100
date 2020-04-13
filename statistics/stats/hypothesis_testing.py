@@ -2,7 +2,7 @@ from math import sqrt
 
 from scipy.stats import norm, t, chi2, f
 
-from stats.descriptive_stats import mean, std, variance, cor
+from stats.descriptive_stats import mean, std, variance, cor, covariance
 
 
 def z_test(data1, data2=None, tail="both", mu=0, sigma1=1, sigma2=None):
@@ -196,3 +196,26 @@ def cor_test(data1, data2):
     p = 2 * (1 - t.cdf(abs(t_value), n-2))
 
     return r, t_value, n-2, p
+
+
+def simple_linear_reg(y, x):
+    """一元线性回归"""
+    assert len(x) == len(y)
+
+    n = len(x)
+    assert n > 1
+
+    mean_x = mean(x)
+    mean_y = mean(y)
+
+    beta1 = covariance(x, y) / variance(x)
+    beta0 = mean_y - beta1 * mean_x
+
+    y_hat = [beta0 + beta1 * e for e in x]
+    ss_residual = sum((e1 - e2)**2 for e1, e2 in zip(y, y_hat))
+    se_model = sqrt(ss_residual / (n-2))
+
+    t_value = beta1 / (se_model / sqrt((n-1)*variance(x)))
+    p = 2 * (1 - t.cdf(abs(t_value), n - 2))
+
+    return beta0, beta1, t_value, n - 2, p

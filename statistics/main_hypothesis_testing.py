@@ -1,4 +1,4 @@
-from stats.hypothesis_testing import z_test, t_test, chi2_test, f_test, cor_test
+from stats.hypothesis_testing import z_test, t_test, chi2_test, f_test, cor_test, simple_linear_reg
 from stats.interval_est import mean_ci_est, mean_diff_ci_z_est
 
 if __name__ == '__main__':
@@ -29,3 +29,4 @@ if __name__ == '__main__':
     happy = [1, 3, 2, 6, 4, 5, 8, 10, 9, 7]
     # 协方差检验
     print(cor_test(score, happy))
+    print(simple_linear_reg(happy, score))
