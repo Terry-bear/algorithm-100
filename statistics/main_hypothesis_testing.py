@@ -1,4 +1,4 @@
-from stats.hypothesis_testing import z_test, t_test, chi2_test, f_test
+from stats.hypothesis_testing import z_test, t_test, chi2_test, f_test, cor_test
 from stats.interval_est import mean_ci_est, mean_diff_ci_z_est
 
 if __name__ == '__main__':
@@ -21,6 +21,11 @@ if __name__ == '__main__':
     # print(t_test_paired(data1, data2, tail="both", mu=0))
 
     # 一个方差的卡方检验
-    print(chi2_test(data1, tail="both", sigma2=5))
+    # print(chi2_test(data1, tail="both", sigma2=5))
     # 两个方差的卡方检验
-    print(f_test(data1, data2, tail="both", ratio=1))
+    # print(f_test(data1, data2, tail="both", ratio=1))
+
+    score = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    happy = [1, 3, 2, 6, 4, 5, 8, 10, 9, 7]
+    # 协方差检验
+    print(cor_test(score, happy))

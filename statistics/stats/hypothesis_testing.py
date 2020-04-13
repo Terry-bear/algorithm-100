@@ -2,7 +2,7 @@ from math import sqrt
 
 from scipy.stats import norm, t, chi2, f
 
-from stats.descriptive_stats import mean, std, variance
+from stats.descriptive_stats import mean, std, variance, cor
 
 
 def z_test(data1, data2=None, tail="both", mu=0, sigma1=1, sigma2=None):
@@ -181,3 +181,18 @@ def anova_oneway(data):
     p = 1 - f.cdf(f_value, dfg, dfe)
 
     return f_value, dfg, dfe, p
+
+
+def cor_test(data1, data2):
+    # 相关系数
+    r = cor(data1, data2)
+    if r**2 == 1:
+        return r, None, None, None
+
+    n = len(data1)
+    assert n > 2
+
+    t_value = r/sqrt((1 - r**2)/(n-2))
+    p = 2 * (1 - t.cdf(abs(t_value), n-2))
+
+    return r, t_value, n-2, p

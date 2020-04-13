@@ -1,5 +1,5 @@
 from collections import Counter
-from stats.descriptive_stats import frequency, mode, median, mean
+from stats.descriptive_stats import frequency, mode, median, mean, covariance, cor
 from stats.descriptive_stats import rng, quartile, variance, std
 if __name__ == "__main__":
     # 测试频数
@@ -45,3 +45,9 @@ if __name__ == "__main__":
     fc = variance(data_fc)
     bzc = std(data_fc)
     print(fc, bzc)
+
+    # 测试协方差,相关系数
+    score = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    happy = [1, 3, 2, 6, 4, 5, 8, 10, 9, 7]
+    print(covariance(score, happy))
+    print(cor(score, happy))

@@ -79,3 +79,20 @@ def variance(data):
 def std(data):
     """标准差"""
     return sqrt(variance(data))
+
+
+def covariance(data1, data2):
+    """协方差"""
+    assert len(data1) == len(data2)
+
+    n = len(data1)
+    assert n > 1
+
+    mean_data1 = mean(data1)
+    mean_data2 = mean(data2)
+    return sum((e1 - mean_data1)*(e2 - mean_data2) for e1, e2 in zip(data1, data2))/(n-1)
+
+
+def cor(data1, data2):
+    """相关系数"""
+    return covariance(data1, data2) / (std(data1)*std(data2))
